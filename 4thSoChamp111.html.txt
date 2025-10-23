@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Super Odds Champion</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='100%25' height='100%25' fill='%23060b0b'/%3E%3Ctext x='50%25' y='55%25' font-size='56' font-family='Poppins, Arial' font-weight='700' text-anchor='middle' fill='%23f5c542'%3ESCOC%3C/text%3E%3C/svg%3E" />
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+:root{--gold:#f5c542;--muted:#b99e4a}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:radial-gradient(circle at 20% 10%, #070707 0%, #000 60%);font-family:'Poppins',system-ui,Arial;color:#fff;-webkit-font-smoothing:antialiased}
+.loading-wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.85));backdrop-filter: blur(2px)}
+.stadium{position:absolute;inset:0;overflow:hidden}
+.light{position:absolute;left:50%;width:220%;height:260%;top:-70%;transform-origin:center;filter:blur(40px);opacity:0.06;mix-blend-mode:screen;background:conic-gradient(from 200deg at 50% 50%, rgba(245,197,66,0.95), rgba(245,197,66,0.25), rgba(245,197,66,0.08), rgba(245,197,66,0.18));animation:lightSweep 2.8s ease-in-out infinite}
+@keyframes lightSweep{0%{transform:translateX(-60%) rotate(0deg)}50%{transform:translateX(-40%) rotate(8deg)}100%{transform:translateX(-60%) rotate(0deg)}}
+.loader-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px}
+.soc{font-weight:800;font-size:72px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;text-shadow:0 1px 0 rgba(0,0,0,0.6),0 6px 20px rgba(245,197,66,0.06),0 12px 60px rgba(245,197,66,0.12);transform:perspective(800px) rotateX(6deg)}
+.loading-sub{color:var(--muted);font-size:16px;letter-spacing:0.6px}
+.progress{width:220px;height:6px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.6)}
+.bar{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),#d4af37);border-radius:999px;transition:width 0.8s ease}
+.content{opacity:0;transform:translateY(12px);transition:opacity 420ms ease,transform 420ms ease}
+.container{max-width:980px;margin:28px auto;padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));box-shadow:0 18px 60px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo-circle{width:72px;height:72px;border-radius:14px;background:linear-gradient(135deg,#0b0b0b,#141212);display:flex;align-items:center;justify-content:center;border:1px solid rgba(245,197,66,0.08);box-shadow:0 8px 30px rgba(245,197,66,0.06)}
+.logo-text{font-weight:800;color:var(--gold);font-size:20px;letter-spacing:1px}
+.title-sub{color:var(--muted);font-size:13px}
+.controls{display:flex;gap:8px;align-items:center}
+.refresh{background:linear-gradient(90deg,var(--gold),#d4af37);color:#000;padding:10px 16px;border-radius:999px;border:0;font-weight:700;cursor:pointer;box-shadow:0 12px 30px rgba(245,197,66,0.08)}
+.lock-screen{width:100%;max-width:720px;margin:40px auto;background:linear-gradient(180deg,#0b0b0b,#070707);border-radius:12px;padding:26px;border:1px solid rgba(245,197,66,0.06);box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+.lock-title{font-size:20px;color:var(--gold);font-weight:800;letter-spacing:1px}
+.lock-sub{color:var(--muted);margin-top:6px}
+.lock-form{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;align-items:center}
+.input{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;color:#fff;font-size:14px}
+.pay-btn{background:linear-gradient(90deg,var(--gold),#d4af37);border:0;padding:12px 18px;border-radius:12px;font-weight:800;color:#000;cursor:pointer;box-shadow:0 12px 30px rgba(245,197,66,0.12)}
+.note-muted{color:var(--muted);font-size:13px;margin-top:10px}
+.section{margin-top:24px}
+.cards{display:grid;grid-template-columns:1fr;gap:14px;max-width:920px;margin:0 auto;align-items:start;overflow:auto;max-height:60vh;padding-right:8px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:16px;border:1px solid rgba(245,197,66,0.06);box-shadow:0 8px 40px rgba(2,6,23,0.6);transition:transform .28s ease,box-shadow .28s ease;display:flex;justify-content:space-between;align-items:center;gap:12px;position:relative}
+.card::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(245,197,66,0.02),transparent);opacity:0;transition:opacity .28s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(245,197,66,0.08)}
+.card:hover::before{opacity:1}
+.match{font-weight:700;font-size:16px;color:#fff}
+.tip{font-weight:800;color:var(--gold);font-size:16px;letter-spacing:0.6px}
+.note{font-size:13px;color:var(--muted);margin-top:6px}
+.footer{margin-top:40px;padding:20px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid rgba(255,255,255,0.02)}
+@media(min-width:720px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.soc{font-size:48px}.logo-text{font-size:16px}}
+</style>
+</head>
+<body>
+  <div class="loading-wrap" id="loading">
+    <div class="stadium" aria-hidden="true"><div class="light"></div></div>
+    <div class="loader-content" role="status" aria-live="polite">
+      <div class="soc" aria-hidden="true">SOC</div>
+      <div class="loading-sub">Super Odds Champion Loading…</div>
+      <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+    </div>
+  </div>
+
+  <main class="content" id="mainContent" aria-hidden="true">
+    <div class="container" role="main">
+      <div class="header">
+        <div class="brand">
+          <div class="logo-circle" aria-hidden="true">
+            <svg width="44" height="44" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#f5c542"/><stop offset="1" stop-color="#d4af37"/></linearGradient></defs>
+              <rect x="6" y="6" width="88" height="88" rx="12" fill="#0b0b0b"/>
+              <text x="50" y="60" text-anchor="middle" font-family="Poppins, Arial" font-weight="800" font-size="40" fill="url(#g1)">SOC</text>
+            </svg>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-start;line-height:1">
+            <div class="logo-text">Super Odds Champion</div>
+            <div class="title-sub">Premium tips · No accounts · Manual odds</div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="refresh" id="refreshBtn" title="Reload odds">Refresh Odds</button>
+        </div>
+      </div>
+
+      <div id="paywall" class="lock-screen" role="region" aria-label="Payment required">
+        <div class="lock-title">Pay to Unlock Today's Predictions</div>
+        <div class="lock-sub">Instant secure payment with Paystack. After successful payment content unlocks for today.</div>
+        <div class="lock-form" style="margin-top:14px">
+          <input id="emailInput" class="input" type="email" placeholder="Your email (required)" style="flex:1;min-width:220px" />
+          <input id="amountInput" class="input" type="number" step="0.01" placeholder="Amount" style="width:140px" />
+          <select id="currencySelect" class="input" style="width:120px"></select>
+          <button id="payNow" class="pay-btn" style="min-width:140px">Pay Now</button>
+        </div>
+        <div class="note-muted">You can't change the amount But currency can be chnaged before payment. Payments are processed by Paystack.</div>
+      </div>
+
+      <section id="predictions" class="section" aria-label="Today's Predictions" style="display:none">
+        <div class="cards" id="cards">
+          <article class="card">
+            <div>
+              <div class="match">Chelsea vs Arsenal</div>
+              <div class="note">Stadium: Stamford Bridge · Confidence: High</div>
+            </div>
+            <div style="text-align:right"><div class="tip">GG (1.85)</div></div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="match">Real Madrid vs Barcelona</div>
+              <div class="note">El Clasico intensity — bet carefully</div>
+            </div>
+            <div style="text-align:right"><div class="tip">Over 2.5 (1.65)</div></div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="match">PSG vs Lyon</div>
+              <div class="note">Early kickoff — watch lineups</div>
+            </div>
+            <div style="text-align:right"><div class="tip">NG (2.10)</div></div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="match">Man City vs Liverpool</div>
+              <div class="note">Tactical matchup</div>
+            </div>
+            <div style="text-align:right"><div class="tip">1X (1.50)</div></div>
+          </article>
+
+          <article class="card">
+            <div>
+              <div class="match">Juventus vs Inter</div>
+              <div class="note">Derby — expect close game</div>
+            </div>
+            <div style="text-align:right"><div class="tip">DD (3.10)</div></div>
+          </article>
+        </div>
+      </section>
+
+      <div class="footer">© 2025 Super Odds Champion — All Rights Reserved</div>
+    </div>
+  </main>
+
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+(function(){
+  const loading = document.getElementById('loading');
+  const bar = document.getElementById('bar');
+  const main = document.getElementById('mainContent');
+  const paywall = document.getElementById('paywall');
+  const preds = document.getElementById('predictions');
+  const refreshBtn = document.getElementById('refreshBtn');
+  const payNow = document.getElementById('payNow');
+  const emailInput = document.getElementById('emailInput');
+  const amountInput = document.getElementById('amountInput');
+  const currencySelect = document.getElementById('currencySelect');
+  const STORAGE_KEY = 'soc_unlocked_v1';
+
+  function progressSequence(){
+    bar.style.width = '12%';
+    setTimeout(()=> bar.style.width = '36%', 420);
+    setTimeout(()=> bar.style.width = '64%', 1000);
+    setTimeout(()=> bar.style.width = '86%', 1600);
+    setTimeout(()=> bar.style.width = '100%', 2200);
+  }
+
+  async function playIntroSounds(){
+    try{
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const whistle = ctx.createOscillator();
+      const gainW = ctx.createGain();
+      whistle.type = 'sine';
+      whistle.frequency.setValueAtTime(800, ctx.currentTime);
+      whistle.frequency.exponentialRampToValueAtTime(1600, ctx.currentTime + 0.45);
+      gainW.gain.setValueAtTime(0, ctx.currentTime);
+      gainW.gain.linearRampToValueAtTime(0.12, ctx.currentTime + 0.02);
+      gainW.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
+      whistle.connect(gainW).connect(ctx.destination);
+      whistle.start(ctx.currentTime);
+      whistle.stop(ctx.currentTime + 0.6);
+      await new Promise(r=>setTimeout(r, 700));
+      const bufferSize = 2 * ctx.sampleRate;
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) output[i] = (Math.random()*2-1) * Math.exp(-i/bufferSize*3);
+      const noise = ctx.createBufferSource();
+      noise.buffer = noiseBuffer;
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(0.0005, ctx.currentTime);
+      noiseGain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 0.08);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 2.8);
+      const band = ctx.createBiquadFilter();
+      band.type = 'bandpass';
+      band.frequency.value = 600;
+      band.Q.value = 0.8;
+      noise.connect(band).connect(noiseGain).connect(ctx.destination);
+      noise.start();
+      noise.stop(ctx.currentTime + 2.8);
+    }catch(e){}
+  }
+
+  function revealContent(){
+    loading.style.opacity = '0';
+    loading.style.pointerEvents = 'none';
+    loading.style.transition = 'opacity 420ms ease';
+    main.style.opacity = '1';
+    main.style.transform = 'translateY(0)';
+    main.setAttribute('aria-hidden','false');
+    setTimeout(()=> loading.remove(), 600);
+  }
+
+  function isoDate(){ const d=new Date(); return d.toISOString().slice(0,10) }
+
+  function isUnlockedToday(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return false;
+      const obj = JSON.parse(raw);
+      return obj && obj.date === isoDate();
+    }catch(e){ return false }
+  }
+
+  function markUnlocked(ref){
+    const obj = { date: isoDate(), reference: ref, ts: Date.now() };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+  }
+
+  function showPredictionsIfUnlocked(){
+    if(isUnlockedToday()){
+      paywall.style.display = 'none';
+      preds.style.display = 'block';
+    } else {
+      paywall.style.display = 'block';
+      preds.style.display = 'none';
+    }
+  }
+
+  refreshBtn.addEventListener('click', ()=> window.location.reload());
+
+  function toSmallestUnit(amount){
+    return Math.round(Number(amount) * 100);
+  }
+
+  function pickAmountByCountry(code){
+    if(!code) return {currency:'GHS',amount:3};
+    const c = String(code).toUpperCase();
+    if(c === 'GH' || c === 'GHA') return {currency:'GHS',amount:3};
+    if(c === 'NG' || c === 'NGA') return {currency:'NGN',amount:300};
+    if(c === 'ZA' || c === 'ZAF') return {currency:'ZAR',amount:8};
+    return {currency:'USD',amount:0.25};
+  }
+
+  const currencyDefaults = { GHS:3, NGN:300, ZAR:8, USD:0.25 };
+
+  async function detectCountry(){
+    try{
+      const resp = await fetch('https://ipapi.co/json/');
+      if(!resp.ok) return null;
+      const j = await resp.json();
+      return j.country || j.country_code || j.country_code2 || null;
+    }catch(e){ return null }
+  }
+
+  async function setupCurrency(){
+    currencySelect.innerHTML = '';
+    const detected = await detectCountry();
+    const picked = pickAmountByCountry(detected);
+    const opts = [picked.currency,'GHS','NGN','ZAR','USD'];
+    const unique = Array.from(new Set(opts));
+    unique.forEach(c=>{
+      const o = document.createElement('option');
+      o.value = c;
+      o.textContent = c;
+      currencySelect.appendChild(o);
+    });
+    currencySelect.value = picked.currency;
+    amountInput.value = currencyDefaults[picked.currency] !== undefined ? currencyDefaults[picked.currency] : picked.amount;
+  }
+
+  currencySelect.addEventListener('change', ()=>{
+    const val = currencySelect.value || 'GHS';
+    amountInput.value = currencyDefaults[val] !== undefined ? currencyDefaults[val] : amountInput.value;
+  });
+
+  function openPaystackInline(email, amount, currency){
+    const handler = PaystackPop.setup({
+      key: 'pk_live_yourpublickeyhere',
+      email: email,
+      amount: toSmallestUnit(amount),
+      currency: currency,
+      onClose: function(){ alert('Payment window closed.'); },
+      callback: function(response){
+        markUnlocked(response.reference || response.trxref || response.transaction);
+        showPredictionsIfUnlocked();
+        alert('Payment successful. Reference: ' + (response.reference||response.trxref||response.transaction));
+      }
+    });
+    handler.openIframe();
+  }
+
+  payNow.addEventListener('click', ()=>{
+    const email = (emailInput.value||'').trim();
+    const amount = (amountInput.value||'').trim();
+    const currency = currencySelect.value || 'GHS';
+    if(!email || !/\S+@\S+\.\S+/.test(email)){
+      alert('Enter a valid email before paying.');
+      return;
+    }
+    if(!amount || Number(amount) <= 0){
+      alert('Enter a valid amount.');
+      return;
+    }
+    openPaystackInline(email, amount, currency);
+  });
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    main.style.transition = 'opacity 420ms ease, transform 420ms ease';
+    main.style.opacity = '0'; main.style.transform='translateY(12px)';
+    progressSequence();
+    playIntroSounds();
+    setupCurrency().then(()=>{ setTimeout(()=>{ revealContent(); showPredictionsIfUnlocked(); }, 3000); });
+  });
+
+  document.addEventListener('keydown', (e)=> { if(e.key==='r' || e.key==='R'){ window.location.reload() } });
+
+})();
+</script>
+</body>
+</html>
