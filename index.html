@@ -8,124 +8,240 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800&display=swap');
 *{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
 body{font-family:'Poppins',Arial,sans-serif;background:radial-gradient(circle at 20% 10%,#080808 0%,#000 70%);color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.container{width:100%;max-width:520px;background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));border:1px solid rgba(245,197,66,0.06);border-radius:16px;box-shadow:0 12px 60px rgba(0,0,0,0.7);padding:32px;text-align:center}
+.container{width:100%;max-width:560px;background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));border:1px solid rgba(245,197,66,0.06);border-radius:16px;box-shadow:0 12px 60px rgba(0,0,0,0.7);padding:28px;text-align:center}
 h1{font-size:26px;font-weight:800;color:#f5c542;letter-spacing:1px}
-p{color:#b99e4a;font-size:14px;margin-top:6px}.page{display:none}.page.active{display:block}
-input,textarea,select{width:100%;padding:12px;margin-top:10px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:#fff;font-size:15px}
-input::placeholder{color:#666}
+.lead{color:#b99e4a;font-size:14px;margin-top:8px}
+.page{display:none}
+.page.active{display:block}
+.row{display:flex;gap:10px}
+.input, input,textarea,select{width:100%;padding:12px;margin-top:10px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);color:#fff;font-size:15px}
+.input::placeholder, input::placeholder{color:#777}
 textarea{resize:none;height:80px}
-button{width:100%;padding:14px;margin-top:16px;border:none;border-radius:12px;background:linear-gradient(90deg,#f5c542,#d4af37);font-weight:800;color:#000;font-size:16px;cursor:pointer;transition:opacity .2s ease}
-button:hover{opacity:.9}button:active{transform:scale(0.98)}
+button{width:100%;padding:14px;margin-top:16px;border:none;border-radius:12px;background:linear-gradient(90deg,#f5c542,#d4af37);font-weight:800;color:#000;font-size:16px;cursor:pointer;transition:opacity .15s ease,transform .06s ease}
+button:active{transform:scale(.99)}
 button.secondary{background:#222;color:#f5c542;margin-top:10px}
-small{display:block;margin-top:10px;color:#b99e4a;font-size:12px}
-.odds-list{margin-top:20px;text-align:left;font-size:15px;line-height:1.8;color:#fff;max-height:250px;overflow-y:auto;padding-right:8px}
-.footer{margin-top:40px;font-size:12px;color:#b99e4a}
-.lock-screen{padding:20px;background:rgba(0,0,0,0.3);border-radius:12px;margin-top:20px}
-.lock-title{font-size:20px;font-weight:700;color:#f5c542;margin-bottom:8px}
-.lock-sub{font-size:13px;color:#b99e4a;margin-bottom:16px}
-.lock-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.note-muted{font-size:11px;color:#999;margin-top:12px;font-style:italic}
-.disclaimer{background:rgba(255,200,0,0.05);border:1px solid rgba(245,197,66,0.2);border-radius:8px;padding:16px;margin-top:20px;font-size:12px;color:#d4af37;text-align:left}
+.small{font-size:12px;color:#b99e4a;margin-top:8px}
+.odds-list{margin-top:18px;text-align:left;font-size:15px;line-height:1.7;color:#fff;max-height:260px;overflow-y:auto;padding-right:8px}
+.footer{margin-top:30px;font-size:12px;color:#b99e4a}
+.lock-screen{padding:18px;background:rgba(0,0,0,0.28);border-radius:12px;margin-top:18px}
+.lock-title{font-size:18px;font-weight:700;color:#f5c542;margin-bottom:8px}
+.lock-sub{font-size:13px;color:#b99e4a;margin-bottom:12px;text-align:left}
+.disclaimer{background:rgba(255,200,0,0.04);border:1px solid rgba(245,197,66,0.16);border-radius:8px;padding:14px;margin-top:16px;font-size:13px;color:#d4af37;text-align:left}
 .disclaimer strong{color:#f5c542}
 #codeMsg{color:#ff6b6b;font-size:13px;margin-top:10px}
-.success-msg{color:#51cf66;font-size:13px;margin-top:10px}.input-group{margin-top:12px}
+.success-msg{color:#51cf66;font-size:13px;margin-top:10px}
+@media(min-width:640px){h1{font-size:28px}}
 </style>
 </head>
 <body>
 <div class="container">
+  <div id="home" class="page active">
+    <h1>Super Odds Champion</h1>
+    <p class="lead">Win with confidence. Predict smart, play smarter.</p>
+    <div class="disclaimer">
+      <strong>⚠️ Important Notice:</strong> Predictions are based on expert analysis and have an approximate 70% historical accuracy rate. Betting carries risk. Only wager what you can afford to lose.Our betting predictions are based on expert data analysis with an estimated 80–100% accuracy rate on selected games. While our team strives to maintain the highest win consistency, outcomes in sports are never fully guaranteed.
+Please bet responsibly — only stake what you can afford to lose.
 
-<div id="home" class="page active">
-<h1>Super Odds Champion</h1>
-<p>Win with confidence. Predict smart, play smarter.</p>
-<div class="disclaimer">
-<strong>⚠️ Important Notice:</strong> Our predictions have approximately 70% accuracy rate based on expert analysis. However, betting always carries risk and wins are never guaranteed. Only bet what you can afford to lose. We are not responsible for any losses incurred.
-</div>
-<button onclick="goToPage('enter')">Enter Code to Access Ticket</button>
-<button onclick="goToPage('paywall')" class="secondary">Buy Today's Predictions</button>
+If you prefer to receive your access code via WhatsApp, kindly enter your phone number when making payment.
+If you prefer email delivery, please provide your email address instead.
+ </div>
+    <button id="enterCodeBtn">Enter Code to Access Ticket</button>
+    <button id="buyBtn" class="secondary">Buy Today's Predictions</button>
+  </div>
+
+  <div id="paywall" class="page">
+    <h1>Get Today's Predictions</h1>
+    <p class="lead">Secure payment powered by Paystack</p>
+    <div class="lock-screen">
+      <div class="lock-title">Pay to Unlock Today's Predictions</div>
+      <div class="lock-sub">Enter your contact details below. After payment, you will receive an access code via WhatsApp and email within a few minutes.</div>
+      <div class="input-group">
+        <input id="emailInput" class="input" type="email" placeholder="Email (required)">
+      </div>
+      <div class="input-group">
+        <input id="phoneInput" class="input" type="tel" placeholder="Phone number with country code (e.g. +233...) (required)">
+      </div>
+      <div class="lock-form" style="margin-top:8px">
+        <input id="amountInput" class="input" type="number" step="0.01" placeholder="Amount" style="width:48%">
+        <select id="currencySelect" class="input" style="width:48%">
+          <option value="GHS">GHS</option>
+          <option value="NGN">NGN</option>
+          <option value="ZAR">ZAR</option>
+          <option value="USD">USD</option>
+        </select>
+      </div>
+      <button id="payNowBtn" type="button">Pay Now</button>
+      <div class="small">You can change currency before payment. Payments processed securely by Paystack.</div>
+    </div>
+    <button id="payBackBtn" class="secondary">Back to Home</button>
+  </div>
+
+  <div id="enter" class="page">
+    <h1>Enter Confirmation Code</h1>
+    <p class="lead">Enter the code you received after payment</p>
+    <input id="codeInput" class="input" type="text" placeholder="Enter Code (e.g., SOC72 20O 12X)">
+    <button id="verifyBtn" type="button">Access Ticket</button>
+    <p id="codeMsg"></p>
+    <button id="enterBackBtn" class="secondary">Return Home</button>
+  </div>
+
+  <div id="odds" class="page">
+    <h1>Today's Winning Odds</h1>
+    <p style="color:#51cf66;font-size:13px">✓ Access granted - Valid for today only</p>
+    <div class="disclaimer">
+      <strong>How to use:</strong> These are expert predictions for today's matches. GG = Both Teams Score, NG = No Goal, 1X = Home Win or Draw, Over 2.5 = More than 2.5 goals.
+    </div>
+    <div class="odds-list" id="oddsList">
+      ⚽ Chelsea vs Arsenal – GG (1.85)<br>
+      ⚽ Real Madrid vs Barcelona – Over 2.5 (1.65)<br>
+      ⚽ PSG vs Lyon – NG (2.10)<br>
+      ⚽ Man City vs Liverpool – 1X (1.50)<br>
+      ⚽ Juventus vs Inter – DD (3.10)<br>
+      ⚽ Bayern vs Dortmund – GG (1.90)<br>
+      ⚽ AC Milan vs Inter – Over 2.5 (1.75)<br>
+      ⚽ Liverpool vs Tottenham – 1X (1.60)<br>
+      ⚽ Barcelona vs Atletico – GG (1.85)<br>
+      ⚽ Chelsea vs Man United – Over 2.5 (1.70)
+    </div>
+    <small>💡 Tip: Combine 3-5 predictions for better accumulator odds</small>
+    <button id="logoutBtn" type="button">Logout</button>
+  </div>
+
+  <div class="footer">© 2025 Super Odds Champion — All Rights Reserved</div>
 </div>
 
-<div id="paywall" class="page">
-<h1>Get Today's Predictions</h1>
-<p>Unlock today's expert betting predictions</p>
-<div class="lock-screen">
-<div class="lock-title">Pay to Unlock Today's Predictions</div>
-<div class="lock-sub">Instant secure payment with Paystack. After successful payment, you'll receive your access code via WhatsApp and Email within 24hours.</div>
-<div class="input-group">
-<input id="emailInput" type="email" placeholder="Your email (required)">
-<input id="emailInput" type="phone number" placeholder="Your phone number  (required)">
-</div>
-<div class="lock-form">
-<input id="amountInput" type="number" step="0.01" placeholder="Amount" style="width:48%">
-<select id="currencySelect" style="width:48%">
-<option value="GHS">GHS</option>
-<option value="NGN">NGN</option>
-<option value="ZAR">ZAR</option>
-<option value="USD">USD</option>
-</select>
-</div>
-<button id="payNowBtn" type="button">Pay Now</button>
-<div class="note-muted">Amount is set based on your region. You can change currency before payment. Payments are processed securely by Paystack.</div>
-</div>
-<button onclick="goToPage('home')" class="secondary">Back to Home</button>
-</div>
-
-<div id="enter" class="page">
-<h1>Enter Confirmation Code</h1>
-<p>Enter the code you received after payment</p>
-<input id="codeInput" type="text" placeholder="Enter Code (e.g., SOC001)">
-<button onclick="verifyTheCode()" type="button">Access Ticket</button>
-<p id="codeMsg"></p>
-<button onclick="goToPage('home')" class="secondary">Return Home</button>
-</div>
-
-<div id="odds" class="page">
-<h1>Today's Winning Odds</h1>
-<p style="color:#51cf66;font-size:13px">✓ Access granted - Valid for today only</p>
-<div class="disclaimer">
-<strong>How to use:</strong> These are our expert predictions for today's matches. GG = Both Teams Score, NG = No Goal, 1X = Home Win or Draw, Over 2.5 = More than 2.5 goals. Remember: 70% accuracy rate, never bet more than you can afford to lose.
-</div>
-<div class="odds-list">
-⚽ Chelsea vs Arsenal – GG (1.85)<br>
-⚽ Real Madrid vs Barcelona – Over 2.5 (1.65)<br>
-⚽ PSG vs Lyon – NG (2.10)<br>
-⚽ Man City vs Liverpool – 1X (1.50)<br>
-⚽ Juventus vs Inter – DD (3.10)<br>
-⚽ Bayern vs Dortmund – GG (1.90)<br>
-⚽ AC Milan vs Inter – Over 2.5 (1.75)<br>
-⚽ Liverpool vs Tottenham – 1X (1.60)<br>
-⚽ Barcelona vs Atletico – GG (1.85)<br>
-⚽ Chelsea vs Man United – Over 2.5 (1.70)
-</div>
-<small>💡 Tip: Combine 3-5 predictions for better accumulator odds</small>
-<button onclick="logoutUser()" type="button">Logout</button>
-</div>
-
-<div class="footer">© 2025 Super Odds Champion — All Rights Reserved</div>
-
-</div>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
 const STORAGE_KEY = 'soc_unlocked_v1';
-const VALID_CODES = [];
-for (let i=1;i<=100;i++) {
-  VALID_CODES.push('SOC' + String(i).padStart(3,'0'));
-}
+const VALID_CODES = [
+"SOC72 20O 12X","SOC54 79P 93N","SOC85 29U 45U","SOC07 42J 50T","SOC25 88J 58A","SOC57 48V 96Q","SOC29 76P 11G","SOC92 79I 35R","SOC35 41U 98V","SOC14 54T 18F",
+"SOC60 34L 27M","SOC19 11R 63Y","SOC38 72Q 90K","SOC04 23W 44B","SOC21 67S 56H","SOC46 50V 77J","SOC93 82Z 15P","SOC68 39C 66D","SOC76 85K 31N","SOC31 26G 49F",
+"SOC11 94M 07T","SOC17 40Q 51L","SOC05 88F 92V","SOC81 32H 24R","SOC36 71P 14Z","SOC02 16D 87Y","SOC41 99N 22C","SOC66 59S 33B","SOC27 18J 64K","SOC49 55T 08M",
+"SOC89 03P 46V","SOC16 78C 38G","SOC70 47L 29Q","SOC12 30H 69W","SOC64 56N 99X","SOC22 43Z 75D","SOC94 61M 05R","SOC33 08F 83T","SOC44 91K 37P","SOC51 14V 20B",
+"SOC79 25S 42N","SOC03 52J 67Y","SOC61 06C 88G","SOC86 28L 95M","SOC39 73P 10Z","SOC09 35H 57R","SOC58 02F 71T","SOC18 84K 26V","SOC48 69N 04B","SOC13 97S 32J",
+"SOC37 53C 80M","SOC01 21V 62P","SOC47 41L 17G","SOC95 15D 39Y","SOC30 86F 54K","SOC56 07H 81R","SOC24 63N 02T","SOC67 44Z 59B","SOC08 96M 36P","SOC90 29C 73V",
+"SOC42 57S 09N","SOC20 68J 82G","SOC71 12L 47T","SOC34 85H 03Y","SOC15 33F 91K","SOC99 04V 65M","SOC26 49N 78P","SOC62 11C 40R","SOC45 77S 19B","SOC88 50J 06T",
+"SOC06 31L 70M","SOC83 27H 92V","SOC40 95F 28N","SOC96 17K 55P","SOC69 02S 43G","SOC10 74C 84R","SOC63 38M 01Y","SOC52 90L 35T","SOC32 58N 21K","SOC73 13P 60V",
+"SOC28 46F 98M","SOC97 75H 14R","SOC65 88C 53N","SOC43 09M 76P","SOC82 61F 30T","SOC55 20K 89V","SOC98 34S 16N","SOC23 72J 41G","SOC78 45L 66M","SOC84 01P 94R"
+];
 const CURRENCY_AMOUNTS = {GHS:3,NGN:300,ZAR:8,USD:0.25};
 
-function goToPage(pageName){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const target=document.getElementById(pageName);if(target)target.classList.add('active');}
-function getTodayDate(){return new Date().toISOString().slice(0,10);}
-function isUnlockedToday(){try{const stored=localStorage.getItem(STORAGE_KEY);if(!stored)return false;const data=JSON.parse(stored);return data&&data.date===getTodayDate();}catch(e){return false;}}
-function markAsUnlocked(code){localStorage.setItem(STORAGE_KEY,JSON.stringify({code:code,date:getTodayDate()}));}
-function verifyTheCode(){const input=document.getElementById('codeInput');const msg=document.getElementById('codeMsg');const code=input.value.trim();if(!code){msg.textContent='Please enter a code';msg.className='';return;}const isValid=VALID_CODES.some(c=>c.toLowerCase()===code.toLowerCase());if(isValid){markAsUnlocked(code);msg.textContent='Code verified! Redirecting...';msg.className='success-msg';setTimeout(()=>goToPage('odds'),800);}else{msg.textContent='Invalid code. Please check and try again.';msg.className='';}}
-function logoutUser(){if(confirm('Are you sure you want to logout?')){localStorage.removeItem(STORAGE_KEY);goToPage('home');}}
-async function setupCurrency(){try{const res=await fetch('https://ipapi.co/json/');const data=await res.json();const cc=data.country_code||'GH';const sel=document.getElementById('currencySelect');const amt=document.getElementById('amountInput');let currency='GHS';if(cc==='GH')currency='GHS';else if(cc==='NG')currency='NGN';else if(cc==='ZA')currency='ZAR';else currency='USD';sel.value=currency;amt.value=CURRENCY_AMOUNTS[currency];}catch(e){document.getElementById('amountInput').value=3;document.getElementById('currencySelect').value='GHS';}}
-function handlePayment(){const email=document.getElementById('emailInput').value.trim();const amount=document.getElementById('amountInput').value.trim();const currency=document.getElementById('currencySelect').value;if(!email||!/\S+@\S+\.\S+/.test(email)){alert('Please enter a valid email address.');return;}if(!amount||Number(amount)<=0){alert('Please enter a valid amount.');return;}if(typeof PaystackPop==='undefined'){alert('Payment system is loading. Please wait a moment and try again.');return;}const handler=PaystackPop.setup({key:'pk_live_d26479f1e1b828194a08a5514990944abf2f5a71',email:email,amount:Math.round(Number(amount)*100),currency:currency,onClose:function(){alert('Payment window closed.');},callback:function(resp){const reference=resp.reference||resp.trxref||resp.transaction;alert('Payment successful!\n\nTransaction Reference: '+reference+'\n\nYour access code will be sent to your email and WhatsApp within 5-10 minutes. Please check your messages.');goToPage('enter');}});handler.openIframe();}
-document.getElementById('currencySelect').addEventListener('change',function(){document.getElementById('amountInput').value=CURRENCY_AMOUNTS[this.value]||3;});
-document.getElementById('payNowBtn').addEventListener('click',handlePayment);
-document.getElementById('codeInput').addEventListener('keypress',function(e){if(e.key==='Enter'){verifyTheCode();}});
-window.addEventListener('DOMContentLoaded',function(){setupCurrency();if(isUnlockedToday()){const homeDiv=document.getElementById('home');const disclaimer=homeDiv.querySelector('.disclaimer');const statusMsg=document.createElement('p');statusMsg.className='success-msg';statusMsg.textContent='✓ You already have access to today\'s predictions';statusMsg.style.marginTop='16px';const quickBtn=document.createElement('button');quickBtn.textContent='View Today\'s Predictions';quickBtn.onclick=function(){goToPage('odds');};quickBtn.style.marginTop='12px';disclaimer.after(statusMsg);statusMsg.after(quickBtn);}});
+function renderPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el) el.classList.add('active');
+}
+
+function todayISO(){return new Date().toISOString().slice(0,10);}
+
+function isUnlockedToday(){
+  try{
+    const s=localStorage.getItem(STORAGE_KEY);
+    if(!s) return false;
+    const d=JSON.parse(s);
+    return d && d.date === todayISO();
+  }catch(e){return false}
+}
+
+function markUnlocked(code){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({code:code, date: todayISO()}));
+}
+
+function verifyCodeInput(code){
+  return VALID_CODES.some(c=> c.replace(/\s+/g,'').toLowerCase() === code.replace(/\s+/g,'').toLowerCase());
+}
+
+function validateEmail(e){return /\S+@\S+\.\S+/.test(e)}
+function validatePhone(p){return /^\+?[0-9]{7,20}$/.test(p)}
+
+function handleVerify(){
+  const input = document.getElementById('codeInput');
+  const msg = document.getElementById('codeMsg');
+  const code = (input.value || '').trim();
+  msg.textContent = '';
+  msg.className = '';
+  if(!code){ msg.textContent = 'Please enter a code'; return; }
+  if(verifyCodeInput(code)){
+    markUnlocked(code);
+    msg.textContent = 'Code verified. Redirecting...';
+    msg.className = 'success-msg';
+    setTimeout(()=> renderPage('odds'),700);
+    return;
+  }
+  msg.textContent = 'Invalid code. Please check and try again.';
+}
+
+function handleLogout(){
+  if(confirm('Are you sure you want to logout?')){
+    localStorage.removeItem(STORAGE_KEY);
+    renderPage('home');
+  }
+}
+
+function initCurrency(){
+  fetch('https://ipapi.co/json/').then(r=>r.json()).then(data=>{
+    const cc = (data && data.country_code) ? data.country_code : 'GH';
+    const sel = document.getElementById('currencySelect');
+    const amt = document.getElementById('amountInput');
+    let currency = 'GHS';
+    if(cc === 'NG') currency = 'NGN';
+    else if(cc === 'ZA') currency = 'ZAR';
+    else if(cc === 'US') currency = 'USD';
+    sel.value = currency;
+    amt.value = CURRENCY_AMOUNTS[currency] || 3;
+  }).catch(()=>{ document.getElementById('amountInput').value = 3; document.getElementById('currencySelect').value = 'GHS'; });
+}
+
+function payWithPaystack(){
+  const email = (document.getElementById('emailInput').value || '').trim();
+  const phone = (document.getElementById('phoneInput').value || '').trim();
+  const amountRaw = (document.getElementById('amountInput').value || '').trim();
+  const currency = document.getElementById('currencySelect').value || 'GHS';
+
+  if(!validateEmail(email)){ alert('Please enter a valid email address.'); return; }
+  if(!validatePhone(phone)){ alert('Please enter a valid phone number including country code (e.g. +233...)'); return; }
+  if(!amountRaw || Number(amountRaw) <= 0){ alert('Please enter a valid amount.'); return; }
+
+  if(typeof PaystackPop === 'undefined'){ alert('Payment system is loading. Please try again in a moment.'); return; }
+
+  const amount = Math.round(Number(amountRaw) * 100);
+
+  const handler = PaystackPop.setup({
+    key: 'pk_live_d26479f1e1b828194a08a5514990944abf2f5a71',
+    email: email,
+    amount: amount,
+    currency: currency,
+    metadata: { custom_fields: [{ display_name: "Phone", variable_name: "phone", value: phone }] },
+    onClose: function(){ alert('Payment window closed.'); },
+    callback: function(response){
+      const ref = response.reference || response.trxref || response.transaction;
+      alert('Payment successful.\nTransaction Reference: ' + ref + '\nYour access code will be sent to your phone and email shortly.');
+      renderPage('enter');
+    }
+  });
+  handler.openIframe();
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('enterCodeBtn').addEventListener('click', ()=> renderPage('enter'));
+  document.getElementById('buyBtn').addEventListener('click', ()=> renderPage('paywall'));
+  document.getElementById('payBackBtn').addEventListener('click', ()=> renderPage('home'));
+  document.getElementById('enterBackBtn').addEventListener('click', ()=> renderPage('home'));
+  document.getElementById('verifyBtn').addEventListener('click', handleVerify);
+  document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+  document.getElementById('currencySelect').addEventListener('change', function(){ document.getElementById('amountInput').value = CURRENCY_AMOUNTS[this.value] || 3; });
+  document.getElementById('payNowBtn').addEventListener('click', payWithPaystack);
+  document.getElementById('codeInput').addEventListener('keypress', function(e){ if(e.key === 'Enter') handleVerify(); });
+
+  initCurrency();
+
+  if(isUnlockedToday()){
+    renderPage('odds');
+    return;
+  }
+});
 </script>
 </body>
 </html>
-
